@@ -8,7 +8,7 @@ export default {
     },
     extend: {
       gridTemplateColumns: {
-        "auto-cols": "repeat(auto-fit, minmax(264px, 1fr))",
+        "auto-cols": "repeat(auto-fit, minmax(215px, 1fr))",
       },
       colors: {
         dark_Blue_Dark_Mode_Elements: "hsl(209, 23%, 22%)",
