@@ -7,6 +7,9 @@ export default {
       Nunito: ["Nunito Sans", "sans-serif"],
     },
     extend: {
+      screens: {
+        lg: "930px",
+      },
       gridTemplateColumns: {
         "auto-cols": "repeat(auto-fit, minmax(215px, 1fr))",
       },

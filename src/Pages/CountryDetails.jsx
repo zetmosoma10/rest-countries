@@ -1,124 +1,132 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-
-/*
-  {
-    "name": "Afghanistan",
-    "topLevelDomain": [".af"],
-    "alpha2Code": "AF",
-    "alpha3Code": "AFG",
-    "callingCodes": ["93"],
-    "capital": "Kabul",
-    "altSpellings": ["AF", "Afġānistān"],
-    "subregion": "Southern Asia",
-    "region": "Asia",
-    "population": 40218234,
-    "latlng": [33, 65],
-    "demonym": "Afghan",
-    "area": 652230,
-    "timezones": ["UTC+04:30"],
-    "borders": ["IRN", "PAK", "TKM", "UZB", "TJK", "CHN"],
-    "nativeName": "افغانستان",
-    "numericCode": "004",
-    "flags": {
-      "svg": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg",
-      "png": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png"
-    },
-    "currencies": [
-      {
-        "code": "AFN",
-        "name": "Afghan afghani",
-        "symbol": "؋"
-      }
-    ],
-    "languages": [
-      {
-        "iso639_1": "ps",
-        "iso639_2": "pus",
-        "name": "Pashto",
-        "nativeName": "پښتو"
-      },
-      {
-        "iso639_1": "uz",
-        "iso639_2": "uzb",
-        "name": "Uzbek",
-        "nativeName": "Oʻzbek"
-      },
-      {
-        "iso639_1": "tk",
-        "iso639_2": "tuk",
-        "name": "Turkmen",
-        "nativeName": "Türkmen"
-      }
-    ],
-    "translations": {
-      "br": "Afghanistan",
-      "pt": "Afeganistão",
-      "nl": "Afghanistan",
-      "hr": "Afganistan",
-      "fa": "افغانستان",
-      "de": "Afghanistan",
-      "es": "Afganistán",
-      "fr": "Afghanistan",
-      "ja": "アフガニスタン",
-      "it": "Afghanistan",
-      "hu": "Afganisztán"
-    },
-    "flag": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg",
-    "regionalBlocs": [
-      {
-        "acronym": "SAARC",
-        "name": "South Asian Association for Regional Cooperation"
-      }
-    ],
-    "cioc": "AFG",
-    "independent": true
-  },
-  */
+import allCountries from "../data.json";
 
 const CountryDetails = () => {
   const [countryDetails, setCountryDetails] = useState(null);
 
-  console.log(countryDetails);
   const { country } = useParams();
-  const ApiEndPoint = "https://restcountries.com/v3.1/name/" + country;
 
   useEffect(() => {
-    async function getCountryName(ApiEndPoint) {
-      try {
-        const resp = await fetch(ApiEndPoint);
-        if (!resp.ok) {
-          throw new Error("Failed to Fetch Data");
-        }
-        const data = await resp.json();
-        setCountryDetails(data[0]);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getCountryName(ApiEndPoint);
+    const currentCountry = allCountries.find(
+      (countryDetail) => countryDetail.name === country
+    );
+    setCountryDetails(currentCountry);
   }, [country]);
 
   return (
     <section className=" bg-slate-50 min-h-screen">
-      <main className="max-container">
+      <main className="max-container pt-10 flex justify-center lg:block ">
         {countryDetails ? (
-          <div>
-            <div>
-              <img
-                src={countryDetails.flags.svg}
-                alt={countryDetails.flags.alt}
-              />
-            </div>
-            <div className="grid">
-              <p>
-                <span>Native Name:</span>
-                <span>{countryDetails.name.official}</span>
+          <div
+            className=" grid lg:grid-cols-2 gap-y-10 
+            gap-x-28 bg-transparent max-w-[550px] lg:max-w-full "
+          >
+            <img
+              className=" rounded-lg w-full self-center"
+              src={countryDetails.flag}
+              alt={`flag of ${countryDetails.flag}`}
+            />
+            <div className="lg:py-8">
+              <h3 className="font-extrabold text-[22px]">
+                {countryDetails.nativeName}
+              </h3>
+              <div className="grid lg:grid-cols-2 mt-4 lg:mt-6 gap-y-8 gap-x-8">
+                <div>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Native Name:</span>
+                    {"  "}
+                    <span className="font-light">
+                      {countryDetails.nativeName}
+                    </span>
+                  </p>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Population:</span>
+                    {"  "}
+                    <span className="font-light">
+                      {countryDetails.population}
+                    </span>
+                  </p>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Region:</span>
+                    {"  "}
+                    <span className="font-light">{countryDetails.region}</span>
+                  </p>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Sub Region:</span>
+                    {"  "}
+                    <span className="font-light">
+                      {countryDetails.subregion}
+                    </span>
+                  </p>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Capital:</span>
+                    {"  "}
+                    <span className="font-light">
+                      {countryDetails.capital
+                        ? countryDetails.capital
+                        : "No Capital City"}
+                    </span>
+                  </p>
+                </div>
+                <div>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Top Level Domain:</span>
+                    {"  "}
+                    <span className="font-light">
+                      {countryDetails.topLevelDomain
+                        ? countryDetails.topLevelDomain[0]
+                        : "Top Level Domain"}
+                    </span>
+                  </p>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Currencies:</span>
+                    {"  "}
+                    {countryDetails.currencies ? (
+                      countryDetails.currencies.map((item) => (
+                        <span key={item} className="font-light">
+                          {item.name}
+                          {", "}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="font-light">No Currencies</span>
+                    )}
+                  </p>
+                  <p className="font-semibold text-sm leading-8">
+                    <span>Languages:</span>
+                    {"  "}
+                    {countryDetails.languages ? (
+                      countryDetails.languages.map((item, index) => (
+                        <span key={`${item} ${index}`} className="font-light">
+                          {item.name}
+                          {", "}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="font-light">No Languages</span>
+                    )}
+                  </p>
+                </div>
+              </div>
+              <p className="font-semibold text-sm leading-8 mt-8">
+                <span>Border Countries:</span>
+                <span className="flex flex-wrap">
+                  {countryDetails.borders ? (
+                    countryDetails.borders.map((item) => (
+                      <span className="py-1 px-6 rounded-md font-light shadow-md m-1 border">
+                        {item}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="font-light">No Border Countries</span>
+                  )}
+                </span>
               </p>
             </div>
           </div>
         ) : (
-          <p className="text-3xl font-extralight">Loading</p>
+          <p className="text-4xl font-extrabold">Loading...</p>
         )}
       </main>
     </section>
@@ -126,48 +134,3 @@ const CountryDetails = () => {
 };
 
 export default CountryDetails;
-
-// {/* <h3>{countryDetails.name.nativeName.eng.official}</h3> */}
-//               <div className="grid">
-//                 <div>
-//                   <p>
-//                     <span>Native Name:</span>
-//                     <span>{countryDetails.name.nativeName.ara}</span>
-//                   </p>
-//                   <p>
-//                     <span>Population:</span>
-//                     <span>{countryDetails.population}</span>
-//                   </p>
-//                   <p>
-//                     <span>Region:</span>
-//                     <span>{countryDetails.region}</span>
-//                   </p>
-//                   <p>
-//                     <span>Sub Region:</span>
-//                     <span>{countryDetails.subregion}</span>
-//                   </p>
-//                   <p>
-//                     <span>Capital:</span>
-//                     {countryDetails.capital.map((item) => (
-//                       <span>{item}</span>
-//                     ))}
-//                   </p>
-//                 </div>
-//                 <div>
-//                   <p>
-//                     <span>Top Level Domain:</span>
-//                     <span>{countryDetails.tld}</span>
-//                   </p>
-//                   <p>
-//                     <span>Currencies:</span>
-//                     {/* <span>{}</span> */}
-//                   </p>
-//                   <p>
-//                     <span>Languages:</span>
-//                     <span>{countryDetails.languages}</span>
-//                   </p>
-//                 </div>
-//               </div>
-//               <p>Border Countries:</p>
-//             </div>
-//           </div>
