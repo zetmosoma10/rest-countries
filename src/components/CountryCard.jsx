@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const CountryCard = ({ items }) => {
   return (
-    <div className="border  bg-white  shadow-sm hover:shadow-lg rounded-md overflow-hidden cursor-pointer">
+    <div className="border  bg-white  shadow-sm  hover:shadow-lg  rounded-md overflow-hidden cursor-pointer">
       <Link to={items.name}>
         <img className=" object-cover  aspect-1.7/1" src={items.flag} alt="" />
         <div className=" p-6">
