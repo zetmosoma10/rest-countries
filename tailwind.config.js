@@ -7,6 +7,9 @@ export default {
       Nunito: ["Nunito Sans", "sans-serif"],
     },
     extend: {
+      aspectRatio: {
+        "1.7/1": "1.7 / 1",
+      },
       screens: {
         lg: "930px",
       },

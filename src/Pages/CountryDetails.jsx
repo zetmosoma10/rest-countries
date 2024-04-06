@@ -114,7 +114,10 @@ const CountryDetails = () => {
                 <span className="flex flex-wrap">
                   {countryDetails.borders ? (
                     countryDetails.borders.map((item) => (
-                      <span className="py-1 px-6 rounded-md font-light shadow-md m-1 border">
+                      <span
+                        key={item}
+                        className="py-1 px-6 rounded-md font-light shadow-md m-1 border"
+                      >
                         {item}
                       </span>
                     ))
