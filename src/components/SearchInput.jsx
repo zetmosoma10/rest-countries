@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 
-const SearchInput = ({ input, handleSearchInput}) => {
+const SearchInput = ({ input, handleSearchInput }) => {
   const [inputFocused, setInputFocused] = useState(false);
- 
 
   const handleInputFocus = () => {
     setInputFocused(true);
@@ -18,7 +17,7 @@ const SearchInput = ({ input, handleSearchInput}) => {
         className={`bg-white rounded overflow-hidden 
             ${
               inputFocused ? "ring-2 ring-slate-300 " : ""
-            }  flex items-center shadow-lg`}
+            }  flex items-center shadow-lg w-full md:w-[40%]`}
       >
         <span className="text-lg opacity-50 ml-8">
           <IoIosSearch />

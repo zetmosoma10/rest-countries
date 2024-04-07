@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import CountryCard from "../components/CountryCard";
-import countriesData from "../data.json";
-
 import SearchInput from "../components/SearchInput";
+import CustomDropdown from "../components/CustomDropdown";
+import countriesData from "../data.json";
 
 const Home = () => {
   const [allCountries, setAllCountries] = useState(countriesData);
@@ -36,8 +36,14 @@ const Home = () => {
   return (
     <section className=" bg-slate-50 min-h-screen">
       <main className=" max-container">
-        <div className="py-7 lg:py-12 ">
+        <div
+          className="flex flex-col md:flex-row items-start md:items-center 
+          justify-between py-7 lg:py-12 gap-10"
+        >
           <SearchInput handleSearchInput={handleSearchInput} input={input} />
+          <CustomDropdown
+            options={["Africa", "Europe", "Asia", " America", " Oceania"]}
+          />
         </div>
         <div
           className="pb-7 md:pb-12 grid grid-cols-auto-cols gap-y-10 
