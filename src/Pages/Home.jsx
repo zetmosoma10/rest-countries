@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CountryCard from "../components/CountryCard";
 import countriesData from "../data.json";
 
@@ -11,13 +11,23 @@ const Home = () => {
   const handleSearchInput = (e) => {
     const { value } = e.target;
     setInput(value);
+  };
 
+  useEffect(() => {
+    if (input.trim().length !== 0) {
+      getFilteredCountries();
+    } else {
+      setAllCountries(countriesData);
+    }
+  }, [input]);
+
+  function getFilteredCountries() {
     const filterCountries = countriesData.filter((country) =>
-      country.name.trim().toLowerCase().includes(input.toLowerCase())
+      country.name.toLowerCase().includes(input.toLowerCase())
     );
 
     setAllCountries(filterCountries);
-  };
+  }
 
   const renderCountries = allCountries.map((country) => (
     <CountryCard key={`${country.name} ${country.flag}`} items={country} />
