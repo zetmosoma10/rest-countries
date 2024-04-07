@@ -13,14 +13,6 @@ const Home = () => {
     setInput(value);
   };
 
-  useEffect(() => {
-    if (input.trim().length !== 0) {
-      getFilteredCountries();
-    } else {
-      setAllCountries(countriesData);
-    }
-  }, [input]);
-
   function getFilteredCountries() {
     const filterCountries = countriesData.filter((country) =>
       country.name.toLowerCase().includes(input.toLowerCase())
@@ -28,6 +20,14 @@ const Home = () => {
 
     setAllCountries(filterCountries);
   }
+
+  useEffect(() => {
+    if (input.trim().length !== 0) {
+      getFilteredCountries();
+    } else {
+      setAllCountries(countriesData);
+    }
+  }, [input]);
 
   const renderCountries = allCountries.map((country) => (
     <CountryCard key={`${country.name} ${country.flag}`} items={country} />

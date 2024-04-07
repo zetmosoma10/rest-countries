@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import allCountries from "../data.json";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 const CountryDetails = () => {
   const [countryDetails, setCountryDetails] = useState(null);
@@ -15,7 +17,18 @@ const CountryDetails = () => {
   }, [country]);
 
   return (
-    <section className=" bg-slate-50 min-h-screen">
+    <section className=" bg-slate-50 min-h-screen py-10">
+      <div className="max-container">
+        <Link
+          to=".."
+          className="flex items-center w-28 active:ring-2 active:ring-slate-300 border py-1 px-5 rounded-sm border-0 shadow-lg bg-white"
+        >
+          <span className="mr-1.5 ">
+            <IoArrowBackOutline />
+          </span>
+          Back
+        </Link>
+      </div>
       <main className="max-container pt-10 flex justify-center lg:block ">
         {countryDetails ? (
           <div
