@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import allCountries from "../data.json";
 import { IoArrowBackOutline } from "react-icons/io5";
 
 const CountryDetails = () => {
   const [countryDetails, setCountryDetails] = useState(null);
-
+  const location = useLocation();
+  console.log(location);
   const { country } = useParams();
 
   useEffect(() => {
@@ -16,11 +17,15 @@ const CountryDetails = () => {
     setCountryDetails(currentCountry);
   }, [country]);
 
+  // const search = state?.search || "";
+  const searchParams = location.state?.search || "";
+
   return (
     <section className=" bg-slate-50 min-h-screen py-10">
       <div className="max-container">
         <Link
-          to=".."
+          to={`..${searchParams}`}
+          relative="path"
           className="flex items-center w-28 active:ring-2 active:ring-slate-300 border py-1 px-5 rounded-sm border-0 shadow-lg bg-white"
         >
           <span className="mr-1.5 ">

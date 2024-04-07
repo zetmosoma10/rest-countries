@@ -12,8 +12,7 @@ const Home = () => {
   const continent = searchParams.get("continent");
 
   const handleSearchInput = (e) => {
-    const { value } = e.target;
-    setInput(value);
+    setInput(e.target.value);
   };
 
   function getFilteredCountries() {
@@ -28,10 +27,10 @@ const Home = () => {
     const filterContinent = countriesData.filter((country) =>
       country.region.toLowerCase().includes(continent)
     );
-
     setAllCountries(filterContinent);
   }
 
+  // Select option Effect
   useEffect(() => {
     if (!continent) {
       setAllCountries(countriesData);
@@ -40,16 +39,22 @@ const Home = () => {
     }
   }, [continent]);
 
+  // SearchInput Effect
   useEffect(() => {
     if (input.trim().length !== 0) {
       getFilteredCountries();
+      setSearchParams({});
     } else {
       setAllCountries(countriesData);
     }
   }, [input]);
 
   const renderCountries = allCountries.map((country) => (
-    <CountryCard key={`${country.name} ${country.flag}`} items={country} />
+    <CountryCard
+      searchParams={searchParams}
+      key={`${country.name} ${country.flag}`}
+      items={country}
+    />
   ));
 
   return (
