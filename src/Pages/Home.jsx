@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import CountryCard from "../components/CountryCard";
 import SearchInput from "../components/SearchInput";
 import CustomDropdown from "../components/CustomDropdown";
@@ -7,6 +8,8 @@ import countriesData from "../data.json";
 const Home = () => {
   const [allCountries, setAllCountries] = useState(countriesData);
   const [input, setInput] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const continent = searchParams.get("continent");
 
   const handleSearchInput = (e) => {
     const { value } = e.target;
@@ -20,6 +23,22 @@ const Home = () => {
 
     setAllCountries(filterCountries);
   }
+
+  function getFilteredContinent() {
+    const filterContinent = countriesData.filter((country) =>
+      country.region.toLowerCase().includes(continent)
+    );
+
+    setAllCountries(filterContinent);
+  }
+
+  useEffect(() => {
+    if (!continent) {
+      setAllCountries(countriesData);
+    } else {
+      getFilteredContinent();
+    }
+  }, [continent]);
 
   useEffect(() => {
     if (input.trim().length !== 0) {
@@ -42,7 +61,15 @@ const Home = () => {
         >
           <SearchInput handleSearchInput={handleSearchInput} input={input} />
           <CustomDropdown
-            options={["Africa", "Europe", "Asia", " America", " Oceania"]}
+            setSearchParams={setSearchParams}
+            options={[
+              "Filter by Region",
+              "africa",
+              "europe",
+              "asia",
+              "america",
+              "oceania",
+            ]}
           />
         </div>
         <div

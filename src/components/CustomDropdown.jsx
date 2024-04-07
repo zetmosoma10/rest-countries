@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 
-const CustomDropdown = ({ options }) => {
+const CustomDropdown = ({ options, setSearchParams }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
@@ -40,11 +40,18 @@ const CustomDropdown = ({ options }) => {
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {options.map((option) => (
+            {options.map((option, index) => (
               <div
-                key={option}
+                key={`${option} ${index}`}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleOptionSelect(option)}
+                onClick={() => {
+                  handleOptionSelect(option);
+                  if (option === "Filter by Region") {
+                    setSearchParams({});
+                  } else {
+                    setSearchParams({ continent: option });
+                  }
+                }}
               >
                 {option}
               </div>
