@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { Link, useLocation } from "react-router-dom";
 import allCountries from "../data.json";
 import { IoArrowBackOutline } from "react-icons/io5";
+import CountryDetailsSkeleton from "../skeletons/CountryDetailsSkeleton";
 
 const CountryDetails = () => {
   const [countryDetails, setCountryDetails] = useState(null);
@@ -149,7 +150,7 @@ const CountryDetails = () => {
             </div>
           </div>
         ) : (
-          <p className="text-4xl font-extrabold">Loading...</p>
+          <CountryDetailsSkeleton />
         )}
       </main>
     </section>
