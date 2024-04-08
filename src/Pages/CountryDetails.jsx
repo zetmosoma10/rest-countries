@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import allCountries from "../data.json";
 import { IoArrowBackOutline } from "react-icons/io5";
 import CountryDetailsSkeleton from "../skeletons/CountryDetailsSkeleton";
@@ -29,7 +29,7 @@ const CountryDetails = () => {
           to={`..${searchParams}`}
           relative="path"
           className="flex items-center w-28 active:ring-2 active:ring-slate-300 dark:active:ring-slate-600 border py-1 px-5 
-            rounded-sm border-0 shadow-lg bg-white dark:bg-dark_Blue_Dark_Mode_Elements"
+            rounded-sm  shadow-lg bg-white dark:bg-dark_Blue_Dark_Mode_Elements"
         >
           <span className="mr-1.5 ">
             <IoArrowBackOutline />

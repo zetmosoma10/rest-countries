@@ -10,8 +10,9 @@ const Home = () => {
   const [allCountries, setAllCountries] = useState(countriesData);
   const [input, setInput] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const continent = searchParams.get("continent");
   const [loading, setLoading] = useState(true);
+
+  const continent = searchParams.get("continent");
 
   const handleSearchInput = (e) => {
     setInput(e.target.value);
@@ -83,6 +84,7 @@ const Home = () => {
         >
           <SearchInput handleSearchInput={handleSearchInput} input={input} />
           <CustomDropdown
+            searchParams={searchParams}
             setSearchParams={setSearchParams}
             options={[
               "Filter by Region",
@@ -98,9 +100,21 @@ const Home = () => {
           className="pb-7 md:pb-12 grid grid-cols-auto-cols gap-y-10 
             md:gap-y-[75px] gap-x-10 "
         >
-          {loading
-            ? [1, 2, 3, 4, 5, 6, 7, 8].map((item) => <CountryCardSkeleton />)
-            : renderCountries}
+          {loading ? (
+            [1, 2, 3, 4, 5, 6, 7, 8].map((item) => <CountryCardSkeleton />)
+          ) : allCountries.length === 0 ? ( // Check if the filtered list is empty
+            <p className="text-3xl font-medium dark:text-slate-50">
+              No Country with that Name.
+            </p> // Render "Something" if no country is found
+          ) : (
+            allCountries.map((country) => (
+              <CountryCard
+                searchParams={searchParams}
+                key={`${country.name} ${country.flag}`}
+                items={country}
+              />
+            ))
+          )}
         </div>
       </main>
     </section>

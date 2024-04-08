@@ -1,10 +1,15 @@
 // CustomDropdown.js
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 
-const CustomDropdown = ({ options, setSearchParams }) => {
+const CustomDropdown = ({ options, setSearchParams, searchParams }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  useEffect(() => {
+    const continent = searchParams.get("continent");
+    setSelectedOption(continent || options[0]);
+  }, [searchParams, options]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
