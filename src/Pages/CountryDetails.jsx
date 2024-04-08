@@ -7,7 +7,6 @@ import { IoArrowBackOutline } from "react-icons/io5";
 const CountryDetails = () => {
   const [countryDetails, setCountryDetails] = useState(null);
   const location = useLocation();
-  console.log(location);
   const { country } = useParams();
 
   useEffect(() => {
@@ -21,12 +20,15 @@ const CountryDetails = () => {
   const searchParams = location.state?.search || "";
 
   return (
-    <section className=" bg-slate-50 min-h-screen py-10">
+    <section
+      className={` bg-slate-50 dark:text-slate-50 dark:bg-Very_Dark_Blue_Dark_Mode_Background min-h-screen py-10`}
+    >
       <div className="max-container">
         <Link
           to={`..${searchParams}`}
           relative="path"
-          className="flex items-center w-28 active:ring-2 active:ring-slate-300 border py-1 px-5 rounded-sm border-0 shadow-lg bg-white"
+          className="flex items-center w-28 active:ring-2 active:ring-slate-300 dark:active:ring-slate-600 border py-1 px-5 
+            rounded-sm border-0 shadow-lg bg-white dark:bg-dark_Blue_Dark_Mode_Elements"
         >
           <span className="mr-1.5 ">
             <IoArrowBackOutline />
@@ -134,7 +136,7 @@ const CountryDetails = () => {
                     countryDetails.borders.map((item) => (
                       <span
                         key={item}
-                        className="py-1 px-6 rounded-md font-light shadow-md m-1 border"
+                        className="py-1 px-6 rounded-md font-light shadow-md m-1 border dark:border-slate-600"
                       >
                         {item}
                       </span>

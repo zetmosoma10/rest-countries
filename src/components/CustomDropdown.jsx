@@ -21,9 +21,10 @@ const CustomDropdown = ({ options, setSearchParams }) => {
         <button
           type="button"
           className="inline-flex justify-between w-full px-4 py-2 
-            text-sm font-medium text-gray-700 bg-white border border-gray-300 
-            rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 
-            focus:ring-offset-2 focus:ring-offset-gray-100"
+            text-sm font-medium text-gray-700 dark:text-slate-50 bg-white dark:bg-dark_Blue_Dark_Mode_Elements 
+            border border-gray-300 dark:border-slate-600
+            rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-600
+            focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-slate-600"
           onClick={toggleDropdown}
         >
           {selectedOption}
@@ -33,7 +34,7 @@ const CustomDropdown = ({ options, setSearchParams }) => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="origin-top-right absolute  md:right-0  mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-dark_Blue_Dark_Mode_Elements ring-1 ring-black ring-opacity-5">
           <div
             className="py-1"
             role="menu"
@@ -43,7 +44,7 @@ const CustomDropdown = ({ options, setSearchParams }) => {
             {options.map((option, index) => (
               <div
                 key={`${option} ${index}`}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                className="block px-4 py-2 text-sm text-gray-700 dark:text-slate-50 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
                 onClick={() => {
                   handleOptionSelect(option);
                   if (option === "Filter by Region") {

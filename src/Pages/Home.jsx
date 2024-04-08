@@ -58,7 +58,9 @@ const Home = () => {
   ));
 
   return (
-    <section className=" bg-slate-50 min-h-screen">
+    <section
+      className={`bg-slate-50 dark:bg-Very_Dark_Blue_Dark_Mode_Background min-h-screen`}
+    >
       <main className=" max-container">
         <div
           className="flex flex-col md:flex-row items-start md:items-center 
